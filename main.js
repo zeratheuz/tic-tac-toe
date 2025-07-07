@@ -1,6 +1,6 @@
 const Gameboard = (function () {
-  const rows = 4
-  const columns = 4
+  const rows = 3
+  const columns = 3
   const gameboard = []
 
   for (let i = 0; i < rows; i++) {
@@ -9,4 +9,8 @@ const Gameboard = (function () {
       gameboard[i].push(Cell())
     } 
   }
+
+  const getGameboard = () => gameboard
+
+  return {gameboard}
 })()
