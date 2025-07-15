@@ -6,13 +6,13 @@ function Gameboard() {
   for (let i = 0; i < rows; i++) {
     gameboard[i] = []
     for (let j = 0; j < columns; j++) {
-      gameboard[i].push("#")
+      gameboard[i].push(Cell())
     } 
   }
 
   const getGameboard = () => gameboard
 
-  return {gameboard}
+  return {getGameboard}
 }
 
 function Cell(){
