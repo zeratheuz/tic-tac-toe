@@ -1,4 +1,4 @@
-const Gameboard = function () {
+function Gameboard() {
   const rows = 3
   const columns = 3
   const gameboard = []
@@ -13,4 +13,19 @@ const Gameboard = function () {
   const getGameboard = () => gameboard
 
   return {gameboard}
+}
+
+function Cell(){
+  let token = "#"
+
+  const addToken = (playerToken) => {
+    token = playerToken
+  }
+
+  const getToken = () => token
+
+  return {
+    addToken,
+    getToken
+  }
 }
