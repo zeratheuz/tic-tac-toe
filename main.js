@@ -12,7 +12,7 @@ function Gameboard() {
 
   const getGameboard = () => gameboard
 
-  const dropToken = (row, column, player = "Z") => {
+  const dropToken = (row, column, player) => {
     const availableCell = gameboard[row][column].getToken() === "#"
 
     if (!availableCell) return
@@ -41,4 +41,27 @@ function Cell(){
     addToken,
     getToken
   }
+}
+
+function GameController(
+  playerOneName = "One", 
+  playerTwoName = "Two") {
+    const gameboard = Gameboard()
+
+    const players = [
+      {
+        name: playerOneName,
+        token: "X"
+      },
+      {
+        name: playerTwoName,
+        token: "O"
+      }
+    ]
+
+    let activePlayer = players[0]
+
+    const switchPlayerTurn = () => {
+      activePlayer = activePlayer === players[0] ? players[1] : players[0]
+    }
 }
