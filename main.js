@@ -20,7 +20,12 @@ function Gameboard() {
     gameboard[row][column].addToken(player)
   }
 
-  return {getGameboard, dropToken}
+  const printGameboard = () => {
+    const cellTokens = gameboard.map((cellRow) => cellRow.map((cell => cell.getToken())))
+    console.log(cellTokens)
+  }
+
+  return {getGameboard, dropToken, printGameboard}
 }
 
 function Cell(){
