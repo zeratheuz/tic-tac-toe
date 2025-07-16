@@ -12,7 +12,15 @@ function Gameboard() {
 
   const getGameboard = () => gameboard
 
-  return {getGameboard}
+  const dropToken = (row, column, player = "Z") => {
+    const availableCell = gameboard[row][column].getToken() === "#"
+
+    if (!availableCell) return
+
+    gameboard[row][column].addToken(player)
+  }
+
+  return {getGameboard, dropToken}
 }
 
 function Cell(){
