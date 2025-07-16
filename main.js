@@ -7,17 +7,17 @@ function Gameboard() {
     gameboard[i] = []
     for (let j = 0; j < columns; j++) {
       gameboard[i].push(Cell())
-    } 
+    }
   }
 
   const getGameboard = () => gameboard
 
-  const dropToken = (row, column, player) => {
+  const dropToken = (row, column, playerToken) => {
     const availableCell = gameboard[row][column].getToken() === "#"
 
     if (!availableCell) return
 
-    gameboard[row][column].addToken(player)
+    gameboard[row][column].addToken(playerToken)
   }
 
   const printGameboard = () => {
@@ -25,10 +25,10 @@ function Gameboard() {
     console.log(cellTokens)
   }
 
-  return {getGameboard, dropToken, printGameboard}
+  return { getGameboard, dropToken, printGameboard }
 }
 
-function Cell(){
+function Cell() {
   let token = "#"
 
   const addToken = (playerToken) => {
@@ -44,24 +44,46 @@ function Cell(){
 }
 
 function GameController(
-  playerOneName = "One", 
+  playerOneName = "One",
   playerTwoName = "Two") {
-    const gameboard = Gameboard()
+  const gameboard = Gameboard()
 
-    const players = [
-      {
-        name: playerOneName,
-        token: "X"
-      },
-      {
-        name: playerTwoName,
-        token: "O"
-      }
-    ]
-
-    let activePlayer = players[0]
-
-    const switchPlayerTurn = () => {
-      activePlayer = activePlayer === players[0] ? players[1] : players[0]
+  const players = [
+    {
+      name: playerOneName,
+      token: "X"
+    },
+    {
+      name: playerTwoName,
+      token: "O"
     }
+  ]
+
+  let activePlayer = players[0]
+
+  const switchPlayerTurn = () => {
+    activePlayer = activePlayer === players[0] ? players[1] : players[0]
+  }
+  const getActivePlayer = () => activePlayer
+
+  const printNewRound = () => {
+    gameboard.printGameboard()
+    console.log(`${getActivePlayer().name}'s turn.`)
+  }
+
+  const playRound = (row, column) => {
+    console.log(`Dropping ${getActivePlayer().name}'s token into ${row}, ${column} position...`)
+    gameboard.dropToken(row, column, getActivePlayer().token)
+
+    switchPlayerTurn()
+    printNewRound()
+  }
+
+  printNewRound()
+
+  return {
+    playRound,
+    getActivePlayer,
+    getBoard: gameboard.getBoard
+  }
 }
