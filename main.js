@@ -75,6 +75,15 @@ function GameController(
     console.log(`Dropping ${getActivePlayer().name}'s token into ${row}, ${column} position...`)
     gameboard.dropToken(row, column, getActivePlayer().token)
 
+    const winCheck = () => {
+      const gameboardCopy = gameboard.getGameboard()
+      const gameboardTokens = gameboardCopy.map((cellRow) => cellRow.map((cell => cell.getToken())))
+
+
+      console.log(gameboardTokens)
+    }
+
+    winCheck()
     switchPlayerTurn()
     printNewRound()
   }
