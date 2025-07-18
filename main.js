@@ -75,7 +75,7 @@ function GameController(
     console.log(`Dropping ${getActivePlayer().name}'s token into ${row}, ${column} position...`)
     gameboard.dropToken(row, column, getActivePlayer().token)
 
-    const checkWin = () => {
+    const checkWin = (playerToken) => {
       const gameboardCopy = gameboard.getGameboard()
       const gameboardTokens = gameboardCopy.map((cellRow) => cellRow.map((cell => cell.getToken())))
       const winPatterns = [
@@ -92,7 +92,7 @@ function GameController(
       console.log(gameboardTokens)
     }
 
-    checkWin()
+    checkWin(getActivePlayer().token)
     switchPlayerTurn()
     printNewRound()
   }
@@ -102,6 +102,6 @@ function GameController(
   return {
     playRound,
     getActivePlayer,
-    getBoard: gameboard.getBoard
+    getGameboard: gameboard.getGameboard
   }
 }
