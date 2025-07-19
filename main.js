@@ -88,6 +88,20 @@ function GameController(
         [2, 4, 6]
       ]
 
+      for (let i = 0; i < winPatterns.length; i++){
+        let isWin = true
+
+        for (let j = 0; j < winPatterns[i].length; j++){
+          let index = winPatterns[i][j]
+
+          if(gameboardTokens[index] !== playerToken) {
+            isWin = false
+            break
+          }
+        }
+        
+      }
+
       console.log(gameboardTokens)
     }
 
