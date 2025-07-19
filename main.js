@@ -22,7 +22,7 @@ function Gameboard() {
 
   const printGameboard = () => {
     const cellTokens = gameboard.map((cellRow) => cellRow.map((cell => cell.getToken())))
-    console.log(cellTokens)
+    console.table(cellTokens)
   }
 
   return { getGameboard, dropToken, printGameboard }
@@ -72,6 +72,7 @@ function GameController(
   }
 
   const playRound = (row, column) => {
+    clear()
     console.log(`Dropping ${getActivePlayer().name}'s token into ${row}, ${column} position...`)
     gameboard.dropToken(row, column, getActivePlayer().token)
 
@@ -88,21 +89,24 @@ function GameController(
         [2, 4, 6]
       ]
 
-      for (let i = 0; i < winPatterns.length; i++){
+      for (let i = 0; i < winPatterns.length; i++) {
         let isWin = true
 
-        for (let j = 0; j < winPatterns[i].length; j++){
+        for (let j = 0; j < winPatterns[i].length; j++) {
           let index = winPatterns[i][j]
 
-          if(gameboardTokens[index] !== playerToken) {
+          if (gameboardTokens[index] !== playerToken) {
             isWin = false
             break
           }
         }
-        
+
+        if (isWin) {
+          return alert(`Player ${getActivePlayer().name} Wins!`)
+        }
       }
 
-      console.log(gameboardTokens)
+      return console.log(`Nobody Wins`)
     }
 
     checkWin(getActivePlayer().token)
