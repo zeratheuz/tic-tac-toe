@@ -76,8 +76,7 @@ function GameController(
     gameboard.dropToken(row, column, getActivePlayer().token)
 
     const checkWin = (playerToken) => {
-      const gameboardCopy = gameboard.getGameboard()
-      const gameboardTokens = gameboardCopy.map((cellRow) => cellRow.map((cell => cell.getToken())))
+      const gameboardTokens = gameboard.getGameboard().map((cellRow) => cellRow.map((cell => cell.getToken()))).flat()
       const winPatterns = [
         [0, 1, 2],
         [3, 4, 5],
