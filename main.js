@@ -75,9 +75,9 @@ function GameController(
     clear()
     console.log(`Dropping ${getActivePlayer().name}'s token into ${row}, ${column} position...`)
     gameboard.dropToken(row, column, getActivePlayer().token)
+    const gameboardTokens = gameboard.getGameboard().map((cellRow) => cellRow.map((cell => cell.getToken()))).flat()
 
     const checkWin = (playerToken) => {
-      const gameboardTokens = gameboard.getGameboard().map((cellRow) => cellRow.map((cell => cell.getToken()))).flat()
       const winPatterns = [
         [0, 1, 2],
         [3, 4, 5],
@@ -109,6 +109,21 @@ function GameController(
       return console.log(`Nobody Wins`)
     }
 
+    function checkTie() {
+      let isTie = true
+      gameboardTokens.forEach(token => {
+        if (token === "#")
+          isTie = false
+      });
+      
+      if (isTie) {
+        return alert("It's a tie!")
+      }
+      
+      return false
+    }
+
+    checkTie()
     checkWin(getActivePlayer().token)
     switchPlayerTurn()
     printNewRound()
