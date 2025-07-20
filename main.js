@@ -73,7 +73,7 @@ function GameController(
 
   const playRound = (row, column) => {
     clear()
-    console.log(`Dropping ${getActivePlayer().name}'s token into ${row}, ${column} position...`)
+    const isAvailable = gameboard.getGameboard()[row][column].getToken() === "#"
     gameboard.dropToken(row, column, getActivePlayer().token)
     const gameboardTokens = gameboard.getGameboard().map((cellRow) => cellRow.map((cell => cell.getToken())))
     const gameboardTokensFlat = gameboardTokens.flat()
@@ -116,20 +116,19 @@ function GameController(
         if (token === "#")
           isTie = false
       });
-      
+
       if (isTie) {
         return alert("It's a tie!")
       }
-      
+
       return false
     }
 
     function checkAvailable() {
-      const isAvailable = gameboardTokens[row][column] === "#"
       if (isAvailable) {
         switchPlayerTurn()
+        console.log(`Dropping ${getActivePlayer().name}'s token into ${row}, ${column} position...`)
       }
-
     }
 
     checkTie()
