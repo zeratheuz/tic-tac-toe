@@ -126,8 +126,8 @@ function GameController(
 
     function checkAvailable() {
       if (isAvailable) {
-        switchPlayerTurn()
         console.log(`Dropping ${getActivePlayer().name}'s token into ${row}, ${column} position...`)
+        switchPlayerTurn()
       }
     }
 
