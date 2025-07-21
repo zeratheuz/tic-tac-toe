@@ -148,8 +148,35 @@ function GameController(
 
 function ScreenController() {
   const game = GameController()
-  const gameturn = document.querySelector(".gameturn")
-  const gameboard = document.querySelector(".gameboard")
+  const gameturnDiv = document.querySelector(".gameturn")
+  const gameboardDiv = document.querySelector(".gameboard")
+
+  const updateScreen = () => {
+    gameturnDiv.textContent = ""
+
+    const gameboard = game.getGameboard()
+    const activePlayer = game.getActivePlayer()
+
+    gameturnDiv.textContent = `${activePlayer}'s turn...`
+
+    gameboard.forEach((row, index) => {
+      const rowIndex = index
+
+      row.forEach((cell, index) => {
+        const columnIndex = index
+
+        const cellButton = document.createElement("button")
+        cellButton.classList.add("cell")
+        cellButton.dataset.row = rowIndex
+        cellButton.dataset.column = columnIndex
+        cellButton.textContent = cell.getToken()
+        gameboardDiv.appendChild(cellButton)        
+      })
+    })
+
+  }
+
+  updateScreen()
 
 }
 
