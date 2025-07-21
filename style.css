@@ -35,7 +35,7 @@ div {
   border: solid;
 }
 
-.container {
+.gameboard {
   margin: auto;
   width: 450px;
   height: 450px;
@@ -45,6 +45,6 @@ div {
   grid-template-columns: repeat(3, 150px);
 }
 
-.slot {
+.cell {
   border: solid;
 }
