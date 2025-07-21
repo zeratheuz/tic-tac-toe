@@ -145,3 +145,12 @@ function GameController(
     getGameboard: gameboard.getGameboard
   }
 }
+
+function ScreenController() {
+  const game = GameController()
+  const gameturn = document.querySelector(".gameturn")
+  const gameboard = document.querySelector(".gameboard")
+
+}
+
+ScreenController()
