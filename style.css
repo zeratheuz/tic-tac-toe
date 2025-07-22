@@ -16,7 +16,7 @@ input, button, textarea, select {
 
 body {
   gap: 2rem;
-  margin: 10%;
+  margin: 2rem;
   display: flex;
   text-align: center;
   align-content: center;
@@ -31,20 +31,15 @@ h1 {
   justify-content: center;
 }
 
-div {
-  border: solid;
-}
-
 .gameboard {
   margin: auto;
-  width: 450px;
-  height: 450px;
   display: grid;
   background-color: bisque;
-  grid-template-rows: repeat(3, 150px);
-  grid-template-columns: repeat(3, 150px);
+  grid-template-rows: repeat(3, minmax(120px, 1fr));
+  grid-template-columns: repeat(3, minmax(120px, 1fr));
 }
 
 .cell {
   border: solid;
+  aspect-ratio: 1/1;
 }
