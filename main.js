@@ -72,7 +72,6 @@ function GameController(
   }
 
   const playRound = (row, column) => {
-    clear()
     const isAvailable = gameboard.getGameboard()[row][column].getToken() === "#"
     gameboard.dropToken(row, column, getActivePlayer().token)
     const gameboardTokens = gameboard.getGameboard().map((cellRow) => cellRow.map((cell => cell.getToken())))
@@ -152,10 +151,10 @@ function ScreenController() {
   const gameboardDiv = document.querySelector(".gameboard")
 
   const updateScreen = () => {
-    gameturnDiv.textContent = ""
+    gameboardDiv.textContent = ""
 
     const gameboard = game.getGameboard()
-    const activePlayer = game.getActivePlayer()
+    const activePlayer = game.getActivePlayer().name
 
     gameturnDiv.textContent = `${activePlayer}'s turn...`
 
@@ -170,11 +169,21 @@ function ScreenController() {
         cellButton.dataset.row = rowIndex
         cellButton.dataset.column = columnIndex
         cellButton.textContent = cell.getToken()
-        gameboardDiv.appendChild(cellButton)        
+        gameboardDiv.appendChild(cellButton)
       })
     })
-
   }
+
+  function clickHandlerGameboard(e) {
+    const selectedRow = e.target.dataset.row
+    const selectedCol = e.target.dataset.column
+
+    if (!selectedRow || !selectedCol) return
+
+    game.playRound(selectedRow, selectedCol)
+    updateScreen()
+  }
+  gameboardDiv.addEventListener("click", clickHandlerGameboard)
 
   updateScreen()
 
