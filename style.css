@@ -1,17 +1,10 @@
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   margin: 0;
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   font-family: Arial, Helvetica, sans-serif;
-}
-
-img, picture, video, canvas, svg {
-  display: block;
-  max-width: 100%;
-}
-
-input, button, textarea, select {
-  font: inherit;
 }
 
 body {
@@ -19,7 +12,6 @@ body {
   margin: 2rem;
   display: flex;
   text-align: center;
-  align-content: center;
   flex-direction: column;
   background-color: burlywood;
 }
@@ -34,12 +26,14 @@ h1 {
 .gameboard {
   margin: auto;
   display: grid;
-  background-color: bisque;
-  grid-template-rows: repeat(3, minmax(120px, 1fr));
-  grid-template-columns: repeat(3, minmax(120px, 1fr));
+  grid-template-rows: repeat(3, minmax(100px, 1fr));
+  grid-template-columns: repeat(3, minmax(100px, 1fr));
 }
 
 .cell {
   border: solid;
+  font-size: 5rem;
+  font-weight: bold;
   aspect-ratio: 1/1;
+  background-color: bisque;
 }
