@@ -102,11 +102,11 @@ function GameController(
         }
 
         if (isWin) {
-          return alert(`Player ${getActivePlayer().name} Wins!`)
+          alert(`Player ${getActivePlayer().name} Wins!`)
         }
       }
 
-      return console.log(`Nobody Wins`)
+      return false
     }
 
     function checkTie() {
@@ -117,7 +117,7 @@ function GameController(
       });
 
       if (isTie) {
-        return alert("It's a tie!")
+        alert("It's a tie!")
       }
 
       return false
@@ -145,8 +145,8 @@ function GameController(
   }
 }
 
-function ScreenController() {
-  const game = GameController()
+function ScreenController(playerOne, playerTwo) {
+  const game = GameController(playerOne, playerTwo)
   const gameturnDiv = document.querySelector(".gameturn")
   const gameboardDiv = document.querySelector(".gameboard")
 
