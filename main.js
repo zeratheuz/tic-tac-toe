@@ -13,7 +13,7 @@ function Gameboard() {
   const getGameboard = () => gameboard
 
   const dropToken = (row, column, playerToken) => {
-    const availableCell = gameboard[row][column].getToken() === "#"
+    const availableCell = gameboard[row][column].getToken() === " "
 
     if (!availableCell) return
 
@@ -29,7 +29,7 @@ function Gameboard() {
 }
 
 function Cell() {
-  let token = "#"
+  let token = " "
 
   const addToken = (playerToken) => {
     token = playerToken
@@ -72,7 +72,7 @@ function GameController(
   }
 
   const playRound = (row, column) => {
-    const isAvailable = gameboard.getGameboard()[row][column].getToken() === "#"
+    const isAvailable = gameboard.getGameboard()[row][column].getToken() === " "
     gameboard.dropToken(row, column, getActivePlayer().token)
     const gameboardTokens = gameboard.getGameboard().map((cellRow) => cellRow.map((cell => cell.getToken())))
     const gameboardTokensFlat = gameboardTokens.flat()
@@ -112,7 +112,7 @@ function GameController(
     function checkTie() {
       let isTie = true
       gameboardTokensFlat.forEach(token => {
-        if (token === "#")
+        if (token === " ")
           isTie = false
       });
 
