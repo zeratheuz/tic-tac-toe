@@ -189,4 +189,17 @@ function ScreenController(playerOne, playerTwo) {
 
 }
 
-ScreenController()
+const getPlayers = (function (){
+  const containerDialog = document.querySelector("#containerDialog")
+  containerDialog.showModal()
+
+  const form = document.querySelector("#players")
+  form.addEventListener("submit", (event) => {
+    event.preventDefault()
+    const playersData = new FormData(form)
+    const players = Object.fromEntries(playersData.entries())
+    ScreenController(players.playerOne, players.playerTwo)
+    containerDialog.close()
+  })
+
+})()
