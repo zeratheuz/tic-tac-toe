@@ -79,7 +79,7 @@ function GameController(
     const gameboardTokens = gameboard.getGameboard().map((cellRow) => cellRow.map((cell => cell.getToken())))
     const gameboardTokensFlat = gameboardTokens.flat()
 
-    const checkWin = (playerToken) => {
+    function checkWin(playerToken) {
       const winPatterns = [
         [0, 1, 2],
         [3, 4, 5],
@@ -135,14 +135,19 @@ function GameController(
     if (checkWin(getActivePlayer().token)) {
       gameover = true
       alert(`${getActivePlayer().name} WINS!`)
-    } else if (checkTie()){
+    } else if (checkTie()) {
       alert("It's a tie!")
       gameover = true
     } else {
       checkAvailable()
       printNewRound()
     }
+    console.log(gameover)
+    const getGameover = () => gameover
+    console.log(gameover)
+    console.log(getGameover())
 
+    return getGameover
   }
 
   printNewRound()
@@ -164,6 +169,8 @@ function ScreenController(playerOne, playerTwo) {
 
     const gameboard = game.getGameboard()
     const activePlayer = game.getActivePlayer().name
+    let gameover = game.gameover
+    // console.log(gameover)
 
     gameturnDiv.textContent = `${activePlayer}'s turn...`
 
