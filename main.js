@@ -102,7 +102,7 @@ function GameController(
         }
 
         if (isWin) {
-          alert(`Player ${getActivePlayer().name} Wins!`)
+          return true
         }
       }
 
@@ -130,8 +130,12 @@ function GameController(
       }
     }
 
-    checkTie()
-    checkWin(getActivePlayer().token)
+    if (checkWin(getActivePlayer().token)) {
+      alert(`${getActivePlayer().name} WINS!`)
+    } else {
+      checkTie()
+    }
+    
     checkAvailable()
     printNewRound()
   }
