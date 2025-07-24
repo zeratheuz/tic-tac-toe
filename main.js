@@ -64,6 +64,7 @@ function GameController(
   const switchPlayerTurn = () => {
     activePlayer = activePlayer === players[0] ? players[1] : players[0]
   }
+
   const getActivePlayer = () => activePlayer
 
   const printNewRound = () => {
@@ -71,11 +72,15 @@ function GameController(
     console.log(`${getActivePlayer().name}'s turn.`)
   }
 
-  let gameover = false
+  let isWinner = false
+  let isTie = false
+
+  const getIsWinner = () => isWinner
+  const getIsTie = () => isTie
 
   const playRound = (row, column) => {
     const isAvailable = gameboard.getGameboard()[row][column].getToken() === " "
-    if (!gameover) gameboard.dropToken(row, column, getActivePlayer().token)
+    if (!isWinner && !isTie) gameboard.dropToken(row, column, getActivePlayer().token)
     const gameboardTokens = gameboard.getGameboard().map((cellRow) => cellRow.map((cell => cell.getToken())))
     const gameboardTokensFlat = gameboardTokens.flat()
 
@@ -133,27 +138,23 @@ function GameController(
     }
 
     if (checkWin(getActivePlayer().token)) {
-      gameover = true
-      alert(`${getActivePlayer().name} WINS!`)
+      isWinner = true
     } else if (checkTie()) {
-      alert("It's a tie!")
-      gameover = true
+      isTie = true
     } else {
       checkAvailable()
       printNewRound()
     }
-    console.log(gameover)
-    const getGameover = () => gameover
-    console.log(gameover)
-    console.log(getGameover())
 
-    return getGameover
+
   }
 
   printNewRound()
 
   return {
+    getIsTie,
     playRound,
+    getIsWinner,
     getActivePlayer,
     getGameboard: gameboard.getGameboard
   }
@@ -169,10 +170,16 @@ function ScreenController(playerOne, playerTwo) {
 
     const gameboard = game.getGameboard()
     const activePlayer = game.getActivePlayer().name
-    let gameover = game.gameover
-    // console.log(gameover)
+    const isTie = game.getIsTie()
+    const isWinner = game.getIsWinner()
 
-    gameturnDiv.textContent = `${activePlayer}'s turn...`
+    if (!isWinner && !isTie) {
+      gameturnDiv.textContent = `${activePlayer}'s turn...`
+    } else if (isWinner) {
+      gameturnDiv.textContent = `${activePlayer} WINS!`
+    } else if (isTie) {
+      gameturnDiv.textContent = `It's a Tie!`
+    }
 
     gameboard.forEach((row, index) => {
       const rowIndex = index
