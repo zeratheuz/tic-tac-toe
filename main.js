@@ -71,9 +71,11 @@ function GameController(
     console.log(`${getActivePlayer().name}'s turn.`)
   }
 
+  let gameover = false
+
   const playRound = (row, column) => {
     const isAvailable = gameboard.getGameboard()[row][column].getToken() === " "
-    gameboard.dropToken(row, column, getActivePlayer().token)
+    if (!gameover) gameboard.dropToken(row, column, getActivePlayer().token)
     const gameboardTokens = gameboard.getGameboard().map((cellRow) => cellRow.map((cell => cell.getToken())))
     const gameboardTokensFlat = gameboardTokens.flat()
 
@@ -117,7 +119,7 @@ function GameController(
       });
 
       if (isTie) {
-        alert("It's a tie!")
+        return true
       }
 
       return false
@@ -131,13 +133,16 @@ function GameController(
     }
 
     if (checkWin(getActivePlayer().token)) {
+      gameover = true
       alert(`${getActivePlayer().name} WINS!`)
+    } else if (checkTie()){
+      alert("It's a tie!")
+      gameover = true
     } else {
-      checkTie()
+      checkAvailable()
+      printNewRound()
     }
-    
-    checkAvailable()
-    printNewRound()
+
   }
 
   printNewRound()
@@ -193,7 +198,7 @@ function ScreenController(playerOne, playerTwo) {
 
 }
 
-const getPlayers = (function (){
+const getPlayers = (function () {
   const containerDialog = document.querySelector("#containerDialog")
   containerDialog.showModal()
 
