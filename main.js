@@ -164,10 +164,10 @@ function ScreenController(playerOne, playerTwo) {
   const game = GameController(playerOne, playerTwo)
   const gameturnDiv = document.querySelector(".gameturn")
   const gameboardDiv = document.querySelector(".gameboard")
-  const restartButton = document.createElement("button")
-  restartButton.innerText = "Restart?"
-  restartButton.classList.add("restart")
-  restartButton.addEventListener("click", ScreenController(players.playerOne, players.playerTwo))
+  const restartButton = document.querySelector(".gamerestart")
+  restartButton.addEventListener("click", () => {
+  ScreenController(players.playerOne, players.playerTwo)
+  })
 
   const updateScreen = () => {
     gameboardDiv.textContent = ""
@@ -181,14 +181,8 @@ function ScreenController(playerOne, playerTwo) {
       gameturnDiv.textContent = `${activePlayer}'s turn...`
     } else if (isWinner) {
       gameturnDiv.textContent = `${activePlayer} WINS!`
-      if (!gameturnDiv.querySelector('.restart')) {
-        gameturnDiv.appendChild(restartButton)
-      }
     } else if (isTie) {
-      gameturnDiv.textContent = `It's a Tie! `
-      if (!gameturnDiv.querySelector('.restart')) {
-        gameturnDiv.appendChild(restartButton)
-      }
+      gameturnDiv.textContent = `It's a Tie!`
     }
 
     gameboard.forEach((row, index) => {
