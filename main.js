@@ -212,6 +212,8 @@ function ScreenController(playerOne, playerTwo) {
 
 }
 
+let players
+
 const getPlayers = (function () {
   const containerDialog = document.querySelector("#containerDialog")
   containerDialog.showModal()
@@ -220,7 +222,7 @@ const getPlayers = (function () {
   form.addEventListener("submit", (event) => {
     event.preventDefault()
     const playersData = new FormData(form)
-    const players = Object.fromEntries(playersData.entries())
+    players = Object.fromEntries(playersData.entries())
     ScreenController(players.playerOne, players.playerTwo)
     containerDialog.close()
   })
