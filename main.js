@@ -166,7 +166,7 @@ function ScreenController(playerOne, playerTwo) {
   const gameboardDiv = document.querySelector(".gameboard")
   const restartButton = document.querySelector(".gamerestart")
   restartButton.addEventListener("click", () => {
-  ScreenController(players.playerOne, players.playerTwo)
+    ScreenController(players.playerOne, players.playerTwo)
   })
 
   const updateScreen = () => {
