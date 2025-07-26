@@ -54,6 +54,10 @@ button {
   background: burlywood;
 }
 
+button.gamerestart {
+  background: bisque;
+}
+
 button:hover {
   background: beige;
 }
@@ -61,14 +65,14 @@ button:hover {
 .gameboard {
   margin: auto;
   display: grid;
-  width: clamp(100px, 80vmin, 500px);
+  width: clamp(200px, 80vmin, 400px);
   grid-template-rows: repeat(3, 1fr);
   grid-template-columns: repeat(3, 1fr);
 }
 
 .cell {
   border: solid;
-  font-size: 5rem;
+  font-size: 10vmin;
   font-weight: bold;
   aspect-ratio: 1/1;
   background-color: bisque;
